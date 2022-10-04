@@ -4,7 +4,7 @@ import {BrazoRobotico} from "./brazo_robotico.js";
 
 // Variables estandar
 let renderer, scene, camera, cameraOrtho, cameraControls, cameraHelper;
-const L =90;
+const L =25;
 
 // Otras globales
 let robot, insetWidth, insetHeight;
@@ -29,13 +29,14 @@ function setCameras(ar){
 
     //cameraOrtho
     cameraOrtho = camaraOrtografica.clone();
-    cameraOrtho.position.set(L,0,0);
-    //cameraOrtho.lookAt(0,50,0);
+    cameraOrtho.position.set(0,300,0);
+    cameraOrtho.lookAt(0,-220,0);
+    //cameraOrtho.up.set(0,1,0)
 
     //ayudante de camara
     cameraHelper = new THREE.CameraHelper(camera);
 
-    camera.add(cameraOrtho);
+    //camera.add(cameraOrtho);
 }
 
 function init()
@@ -46,15 +47,15 @@ function init()
 
     //Inicializacion de la escena
     scene = new THREE.Scene();
-    scene.add(camera);
-    //scene.add(cameraOrtho)
+    // scene.add(camera);
+    // scene.add(cameraOrtho)
     
     //Inicializacion del motor de render
     renderer = new THREE.WebGLRenderer({antialias: true, preserveDrawingBuffer: true});
     renderer.setSize(window.innerWidth,window.innerHeight);
+    renderer.setClearColor(0x7c7b82);
     document.getElementById('container').appendChild( renderer.domElement );
-    //renderer.setClearColor(0x7c7b82);
-    //renderer.autoClear = false;
+    renderer.autoClear = false;
 
     //Inicializacion del control de camara
     cameraControls = new OrbitControls( camera, renderer.domElement );
@@ -91,28 +92,30 @@ function loadScene()
     suelo.position.y = -0.2;
     suelo.position.z= 0;
     scene.add(suelo);
-    robot =  new BrazoRobotico(false)
-    scene.add( robot.model());
+    robot =  new BrazoRobotico(false).model()
+    scene.add( robot);
+    scene.add(new THREE.AxesHelper(120))
+}
+
+function update()
+{
+    angulo += 0.01;
+    robot.rotation.y = angulo;
 }
 
 function render()
 {
     requestAnimationFrame(render);
-    //renderer.clear();
-
-    renderer.setClearColor(0x7c7b82);
-    renderer.setViewport(0,0,window.innerWidth,window.innerHeight);
-    renderer.render(scene,camera);
-
-    renderer.setClearColor(0x7c79c9);
-    renderer.clearDepth();
-
+    renderer.clear();
+    update();
     //let dim = Math.min(window.innerWidth, window.innerHeight)/4;
     renderer.setScissorTest( true );
     renderer.setScissor( 0, window.innerHeight - insetHeight, insetWidth, insetHeight );
-
     renderer.setViewport( 0, window.innerHeight - insetHeight, insetWidth, insetHeight );
     renderer.render( scene, cameraOrtho );
-
     renderer.setScissorTest( false );
+    //renderer.setClearColor(0x7c7b82);
+    renderer.setViewport(0,0,window.innerWidth,window.innerHeight);
+    renderer.render(scene,camera);
+
 }

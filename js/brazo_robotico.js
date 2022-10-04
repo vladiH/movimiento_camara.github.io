@@ -165,7 +165,7 @@ class BrazoRobotico{
         boxGeometry.add(mesh);
         // boxGeometry.rotation.y =90*Math.PI/180;
         // boxGeometry.position.y =20;
-        boxGeometry.add(new THREE.AxesHelper(60))
+        //boxGeometry.add(new THREE.AxesHelper(60))
         boxGeometry.position.y = -80
         boxGeometry.position.x = 10
         //boxGeometry.rotation.x =90*Math.PI/180;
