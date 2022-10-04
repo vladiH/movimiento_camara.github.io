@@ -65,6 +65,7 @@ function init()
 
     //Inicializacion de eventos
     window.addEventListener('resize',onWindowResize);
+    onWindowResize();
 }
 
 function onWindowResize(){
