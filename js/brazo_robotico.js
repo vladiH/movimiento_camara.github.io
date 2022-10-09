@@ -10,10 +10,10 @@ class BrazoRobotico{
         const brazo = this.brazo();
         const anteBrazo = this.anteBrazo();
         const pinzaIzq = this.pinza();
-        pinzaIzq.position.z = 10
+        pinzaIzq.position.x = -10
         const pinzaDer = this.pinza();
-        pinzaDer.applyMatrix(new THREE.Matrix4().makeScale(1, 1, -1));
-        pinzaDer.position.z = -10
+        pinzaDer.applyMatrix(new THREE.Matrix4().makeScale(-1, 1, 1));
+        pinzaDer.position.x = 10
         root.add(brazo);
         brazo.add(anteBrazo);
         anteBrazo.add(pinzaIzq);
@@ -23,7 +23,9 @@ class BrazoRobotico{
 
     base(){
         const baseMaterial = new THREE.MeshNormalMaterial({wireframe:this.wireframe});
-        return (new THREE.Mesh( new THREE.CylinderGeometry(50,50,15,100), baseMaterial ));
+        const base = new THREE.Mesh( new THREE.CylinderGeometry(50,50,15,100), baseMaterial );
+        base.position.y = 10;
+        return base;
     }
 
     brazo(){
@@ -72,8 +74,9 @@ class BrazoRobotico{
         const cylinder1 = new THREE.Mesh( new THREE.CylinderGeometry(15,15,40,20), baseMaterial );
         cylinder1.position.y = -80;
         cylinder1.rotation.x = 90*Math.PI/180;
-        cylinder.add(cylinder1);
+        cylinder1.rotation.z = 90*Math.PI/180;
         cylinder.position.x = 120;
+        cylinder.add(cylinder1);
         return cylinder;
     }
 
@@ -166,8 +169,9 @@ class BrazoRobotico{
         // boxGeometry.rotation.y =90*Math.PI/180;
         // boxGeometry.position.y =20;
         //boxGeometry.add(new THREE.AxesHelper(60))
-        boxGeometry.position.y = -80
-        boxGeometry.position.x = 10
+        boxGeometry.position.y = -80;
+        boxGeometry.position.z = 10;
+        boxGeometry.rotation.y =-90*Math.PI/180;
         //boxGeometry.rotation.x =90*Math.PI/180;
         return boxGeometry;
     }

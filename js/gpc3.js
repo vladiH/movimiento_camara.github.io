@@ -4,7 +4,7 @@ import {BrazoRobotico} from "./brazo_robotico.js";
 
 // Variables estandar
 let renderer, scene, camera, cameraOrtho, cameraControls, cameraHelper;
-const L =25;
+const L =40;
 
 // Otras globales
 let robot, insetWidth, insetHeight;
@@ -19,19 +19,19 @@ function setCameras(ar){
     let camaraOrtografica;
     if(ar>1)
         
-        camaraOrtografica = new THREE.OrthographicCamera(-L*ar, L*ar, L,-L,1,1000);
+        camaraOrtografica = new THREE.OrthographicCamera(-L*ar, L*ar, L,-L,1,2000);
     else
-        camaraOrtografica = new THREE.OrthographicCamera(-L, L, L/ar,-L/ar,1,1000);
+        camaraOrtografica = new THREE.OrthographicCamera(-L, L, L/ar,-L/ar,1,2000);
     //perspective camera
     camera = new THREE.PerspectiveCamera( 70, ar, 0.01, 1000);
-    camera.position.y = 340;
-    camera.position.z = 200;
+    camera.position.y = 200;
+    camera.position.z = 400;
 
     //cameraOrtho
     cameraOrtho = camaraOrtografica.clone();
     cameraOrtho.position.set(0,300,0);
-    cameraOrtho.lookAt(0,-220,0);
-    //cameraOrtho.up.set(0,1,0)
+    cameraOrtho.lookAt(0,0,0);
+    cameraOrtho.up.set(0,1,0)
 
     //ayudante de camara
     cameraHelper = new THREE.CameraHelper(camera);
