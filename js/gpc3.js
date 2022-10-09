@@ -4,7 +4,7 @@ import {BrazoRobotico} from "./brazo_robotico.js";
 
 // Variables estandar
 let renderer, scene, camera, cameraOrtho, cameraControls, cameraHelper;
-const L =40;
+const L =30;
 
 // Otras globales
 let robot, insetWidth, insetHeight;
@@ -95,7 +95,7 @@ function loadScene()
     scene.add(suelo);
     robot =  new BrazoRobotico(false).model()
     scene.add( robot);
-    scene.add(new THREE.AxesHelper(120))
+    //scene.add(new THREE.AxesHelper(120))
 }
 
 function update()
@@ -108,7 +108,7 @@ function render()
 {
     requestAnimationFrame(render);
     renderer.clear();
-    update();
+    //update();
     //let dim = Math.min(window.innerWidth, window.innerHeight)/4;
     renderer.setScissorTest( true );
     renderer.setScissor( 0, window.innerHeight - insetHeight, insetWidth, insetHeight );

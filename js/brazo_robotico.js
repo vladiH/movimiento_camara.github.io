@@ -24,6 +24,7 @@ class BrazoRobotico{
     base(){
         const baseMaterial = new THREE.MeshNormalMaterial({wireframe:this.wireframe});
         const base = new THREE.Mesh( new THREE.CylinderGeometry(50,50,15,100), baseMaterial );
+        base.rotation.y = 90*Math.PI/180;
         base.position.y = 10;
         return base;
     }
