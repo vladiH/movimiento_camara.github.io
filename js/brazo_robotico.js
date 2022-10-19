@@ -33,7 +33,7 @@ class BrazoRobotico{
         const baseMaterial = new THREE.MeshNormalMaterial({wireframe:this.wireframe});
         const cylinder = new THREE.Mesh( new THREE.CylinderGeometry(20,20,18,20), baseMaterial );
         cylinder.rotation.z = 90*Math.PI/180;
-        const rectangle = new THREE.Mesh( new THREE.BoxGeometry(18,120,18,2), baseMaterial );
+        const rectangle = new THREE.Mesh( new THREE.BoxGeometry(12,120,18,2), baseMaterial );
         rectangle.rotation.z = 90*Math.PI/180;
         rectangle.position.x = 60;
         cylinder.add(rectangle);
